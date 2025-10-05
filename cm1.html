@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CM1 - Fondamentaux de la gestion du temps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 700px;
+            background: white;
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .slide-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 60px;
+            margin: -60px -60px 40px -60px;
+        }
+        
+        .slide-number {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+        
+        .slide-header h1 {
+            color: white;
+        }
+        
+        h2 {
+            font-size: 36px;
+            color: #667eea;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        h3 {
+            font-size: 28px;
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+        }
+        
+        p, li {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            padding-left: 35px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 24px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            font-weight: 500;
+        }
+        
+        .info-box {
+            background: #ebf4ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff5f5;
+            border-left: 5px solid #f56565;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .definition-card {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            margin: 15px 0;
+        }
+        
+        .definition-card h4 {
+            color: #667eea;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f7fafc;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: 600;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
+            color: #4a5568;
+            font-weight: 600;
+        }
+        
+        .exercise-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+        
+        .exercise-box h3 {
+            color: #c53030;
+        }
+        
+        .emoji {
+            font-size: 36px;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1 : Page de titre -->
+        <div class="slide active">
+            <div class="slide-header">
+                <div class="slide-number">BUT GEA 2e année - GPRH</div>
+                <h1>🧭 Calcul de gestion du temps et tableau de bord social</h1>
+                <p style="font-size: 24px; opacity: 0.9; margin-top: 20px;">CM1 : Les fondamentaux de la gestion du temps</p>
+                <p style="font-size: 18px; opacity: 0.8; margin-top: 10px;">Durée : 2 heures</p>
+            </div>
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="font-size: 24px; color: #667eea; font-weight: 600;">Secteur : Industrie - Cas "IndusPro"</p>
+            </div>
+        </div>
+
+        <!-- Slide 2 : Objectifs -->
+        <div class="slide">
+            <h2>🎯 Objectifs du CM1</h2>
+            <ul style="margin-top: 30px;">
+                <li>Maîtriser les définitions clés du temps de travail</li>
+                <li>Comprendre le cadre légal et conventionnel</li>
+                <li>Distinguer les différents types de temps et d'absences</li>
+                <li>Identifier les enjeux économiques et sociaux du suivi du temps</li>
+                <li>Découvrir les principaux indicateurs RH</li>
+            </ul>
+            <div class="highlight-box" style="margin-top: 40px;">
+                <strong>À la fin de ce cours, vous serez capable de :</strong><br>
+                Analyser une situation de gestion du temps dans une entreprise industrielle et identifier les temps productifs et non productifs.
+            </div>
+        </div>
+
+        <!-- Slide 3 : Plan du cours -->
+        <div class="slide">
+            <h2>📋 Plan du cours</h2>
+            <div style="margin-top: 40px;">
+                <div style="background: #667eea; color: white; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                    <strong>I. Définitions clés du temps de travail</strong>
+                </div>
+                <div style="background: #764ba2; color: white; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                    <strong>II. Cadre légal et conventionnel</strong>
+                </div>
+                <div style="background: #f093fb; color: white; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                    <strong>III. Typologie des temps et des absences</strong>
+                </div>
+                <div style="background: #f5576c; color: white; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                    <strong>IV. Enjeux économiques et sociaux</strong>
+                </div>
+                <div style="background: #43e97b; color: white; padding: 20px; border-radius: 10px;">
+                    <strong>V. Mini-exercice pratique</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 : Partie I - Intro -->
+        <div class="slide">
+            <h2>I. Définitions clés du temps de travail</h2>
+            <div class="info-box">
+                <strong>💡 Pourquoi ces définitions sont-elles importantes ?</strong><br>
+                En GRH, la maîtrise des concepts liés au temps de travail est essentielle pour :<br>
+                • Calculer correctement les salaires<br>
+                • Respecter la législation<br>
+                • Piloter les effectifs et la productivité<br>
+                • Gérer les plannings et l'organisation du travail
+            </div>
+        </div>
+
+        <!-- Slide 5 : Temps de travail effectif -->
+        <div class="slide">
+            <h2>I. Définitions clés du temps de travail</h2>
+            <h3>1. Le temps de travail effectif</h3>
+            <div class="definition-card">
+                <h4>📖 Définition légale (Code du travail - Art. L3121-1)</h4>
+                <p>Le temps de travail effectif est le <strong>temps pendant lequel le salarié est à la disposition de l'employeur</strong> et se conforme à ses directives <strong>sans pouvoir vaquer librement à des occupations personnelles</strong>.</p>
+            </div>
+            <div class="two-columns">
+                <div style="background: #c6f6d5; padding: 20px; border-radius: 10px;">
+                    <strong style="color: #22543d;">✅ Temps de travail effectif :</strong>
+                    <ul style="margin-top: 10px; font-size: 18px;">
+                        <li>Heures au poste de travail</li>
+                        <li>Réunions obligatoires</li>
+                        <li>Formation professionnelle</li>
+                        <li>Temps d'habillage (si obligatoire)</li>
+                    </ul>
+                </div>
+                <div style="background: #fed7d7; padding: 20px; border-radius: 10px;">
+                    <strong style="color: #742a2a;">❌ PAS du temps effectif :</strong>
+                    <ul style="margin-top: 10px; font-size: 18px;">
+                        <li>Pauses déjeuner</li>
+                        <li>Trajets domicile-travail</li>
+                        <li>Temps de pause libre</li>
+                        <li>Temps d'astreinte (sauf intervention)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 : Autres temps -->
+        <div class="slide">
+            <h2>I. Définitions clés du temps de travail</h2>
+            <h3>2. Les autres temps à distinguer</h3>
+            <div class="definition-card">
+                <h4>⏸️ Temps de pause</h4>
+                <p>Période où le salarié peut vaquer librement à ses occupations. <strong>Minimum légal : 20 minutes après 6h de travail consécutif.</strong></p>
+            </div>
+            <div class="definition-card">
+                <h4>🏖️ Congés payés (CP)</h4>
+                <p>Droit à 5 semaines (30 jours ouvrables ou 25 jours ouvrés) par an pour un temps complet. Calculés sur la période de référence (1er juin → 31 mai).</p>
+            </div>
+            <div class="definition-card">
+                <h4>⚖️ RTT (Réduction du Temps de Travail)</h4>
+                <p>Jours de repos compensateur pour les salariés dont la durée conventionnelle dépasse 35h hebdomadaires (ex : forfait 218 jours).</p>
+            </div>
+        </div>
+
+        <!-- Slide 7 : Heures supplémentaires -->
+        <div class="slide">
+            <h2>I. Définitions clés du temps de travail</h2>
+            <h3>3. Les heures supplémentaires</h3>
+            <div class="definition-card">
+                <h4>⏰ Définition</h4>
+                <p>Heures effectuées <strong>au-delà de la durée légale</strong> de 35 heures hebdomadaires (ou durée équivalente prévue par accord collectif).</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Heures supplémentaires</th>
+                        <th>Taux de majoration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>De la 36e à la 43e heure</td>
+                        <td><strong>+ 25%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>À partir de la 44e heure</td>
+                        <td><strong>+ 50%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="warning-box">
+                <strong>⚠️ Important :</strong> Les heures supplémentaires peuvent être compensées par un repos compensateur équivalent (+ majoration) au lieu d'un paiement, selon les accords collectifs.
+            </div>
+        </div>
+
+        <!-- Slide 8 : Cadre légal intro -->
+        <div class="slide">
+            <h2>II. Cadre légal et conventionnel</h2>
+            <div class="info-box">
+                <strong>📚 Les sources du droit du temps de travail :</strong><br><br>
+                <strong>1. Le Code du travail</strong> : règles minimales obligatoires<br>
+                <strong>2. Les conventions collectives</strong> : adaptations sectorielles<br>
+                <strong>3. Les accords d'entreprise</strong> : spécificités locales<br>
+                <strong>4. Le contrat de travail</strong> : clauses individuelles
+            </div>
+            <div class="highlight-box">
+                <strong>Principe de faveur :</strong> En cas de conflit entre plusieurs textes, c'est la disposition la plus favorable au salarié qui s'applique.
+            </div>
+        </div>
+
+        <!-- Slide 9 : Durées légales -->
+        <div class="slide">
+            <h2>II. Cadre légal et conventionnel</h2>
+            <h3>Les durées légales du travail</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type de durée</th>
+                        <th>Durée légale</th>
+                        <th>Durée maximale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hebdomadaire</strong></td>
+                        <td>35 heures</td>
+                        <td>48h (ou 44h en moyenne sur 12 semaines)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quotidienne</strong></td>
+                        <td>-</td>
+                        <td>10 heures (dérogations possibles)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Annuelle</strong></td>
+                        <td>1 607 heures*</td>
+                        <td>Selon accord collectif</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 16px; font-style: italic; margin-top: 20px;">* Pour un temps complet, calculé sur la base de 35h × 52 semaines - congés payés et jours fériés</p>
+            <div class="info-box">
+                <strong>🧮 Calcul de référence :</strong> 35h × 52 semaines = 1 820h - 5 semaines de CP - jours fériés ≈ 1 607h
+            </div>
+        </div>
+
+        <!-- Slide 10 : Repos obligatoires -->
+        <div class="slide">
+            <h2>II. Cadre légal et conventionnel</h2>
+            <h3>Les temps de repos obligatoires</h3>
+            <div class="definition-card">
+                <h4>🌙 Repos quotidien</h4>
+                <p><strong>Minimum 11 heures consécutives</strong> entre deux journées de travail.</p>
+            </div>
+            <div class="definition-card">
+                <h4>📅 Repos hebdomadaire</h4>
+                <p><strong>Minimum 24 heures consécutives</strong> (+ 11h de repos quotidien = 35h au total). En principe le dimanche (sauf dérogations).</p>
+            </div>
+            <div class="warning-box">
+                <strong>⚠️ Sanctions :</strong> Le non-respect des durées maximales et temps de repos est puni d'une amende de 4e classe (750€ par salarié concerné) et peut entraîner des dommages et intérêts.
+            </div>
+        </div>
+
+        <!-- Slide 11 : Typologie intro -->
+        <div class="slide">
+            <h2>III. Typologie des temps et des absences</h2>
+            <p style="font-size: 22px; margin-bottom: 30px;">Pour piloter efficacement les RH, il est essentiel de catégoriser les différents temps et absences.</p>
+            <div class="two-columns">
+                <div style="background: #bee3f8; padding: 25px; border-radius: 10px;">
+                    <h3 style="color: #2c5282; font-size: 24px;">Les temps</h3>
+                    <ul style="font-size: 18px;">
+                        <li>Temps productif</li>
+                        <li>Temps non productif</li>
+                        <li>Temps rémunéré</li>
+                        <li>Temps non rémunéré</li>
+                    </ul>
+                </div>
+                <div style="background: #fef5e7; padding: 25px; border-radius: 10px;">
+                    <h3 style="color: #975a16; font-size: 24px;">Les absences</h3>
+                    <ul style="font-size: 18px;">
+                        <li>Absences rémunérées</li>
+                        <li>Absences indemnisées</li>
+                        <li>Absences non rémunérées</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 : Classification des temps -->
+        <div class="slide">
+            <h2>III. Typologie des temps et des absences</h2>
+            <h3>Classification des temps de présence</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type de temps</th>
+                        <th>Description</th>
+                        <th>Exemples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color: #38a169;">Temps productif</strong></td>
+                        <td>Génère de la valeur ajoutée</td>
+                        <td>Fabrication, assemblage, vente</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #d69e2e;">Temps non productif</strong></td>
+                        <td>Nécessaire mais sans VA directe</td>
+                        <td>Réunions, formation, maintenance</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #667eea;">Temps rémunéré</strong></td>
+                        <td>Payé par l'employeur</td>
+                        <td>Travail effectif, congés payés, formation</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #e53e3e;">Temps non rémunéré</strong></td>
+                        <td>Sans rémunération</td>
+                        <td>Congés sans solde, certaines absences</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 13 : Typologie des absences -->
+        <div class="slide">
+            <h2>III. Typologie des temps et des absences</h2>
+            <h3>Typologie des absences</h3>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 30px;">
+                <div style="background: #c6f6d5; padding: 20px; border-radius: 10px;">
+                    <strong style="color: #22543d; font-size: 20px;">✅ Absences rémunérées par l'employeur</strong>
+                    <p style="margin-top: 10px;">Congés payés, événements familiaux (mariage, naissance), jours fériés chômés</p>
+                </div>
+                <div style="background: #feebc8; padding: 20px; border-radius: 10px;">
+                    <strong style="color: #7c2d12; font-size: 20px;">💰 Absences indemnisées (CPAM, employeur)</strong>
+                    <p style="margin-top: 10px;">Maladie, accident du travail, maternité/paternité, congé parental (partiellement)</p>
+                </div>
+                <div style="background: #fed7d7; padding: 20px; border-radius: 10px;">
+                    <strong style="color: #742a2a; font-size: 20px;">❌ Absences non rémunérées</strong>
+                    <p style="margin-top: 10px;">Congés sans solde, absences injustifiées, grève (sauf accord spécifique)</p>
+                </div>
+            </div>
+            <div class="info-box" style="margin-top: 30px;">
+                <strong>💡 Impact RH :</strong> Chaque type d'absence a un impact différent sur la masse salariale, la productivité et le calcul des indicateurs sociaux.
+            </div>
+        </div>
+
+        <!-- Slide 14 : Absences détaillées -->
+        <div class="slide">
+            <h2>III. Typologie des temps et des absences</h2>
+            <h3>Zoom sur les principales absences</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type d'absence</th>
+                        <th>Durée</th>
+                        <th>Rémunération</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Congés payés</td>
+                        <td>5 semaines/an</td>
+                        <td>100% employeur</td>
+                    </tr>
+                    <tr>
+                        <td>Maladie (arrêt court)</td>
+                        <td>Variable</td>
+                        <td>50% CPAM après carence + complément employeur</td>
+                    </tr>
+                    <tr>
+                        <td>Maternité</td>
+                        <td>16 semaines (1er enfant)</td>
+                        <td>CPAM + maintien de salaire employeur</td>
+                    </tr>
+                    <tr>
+                        <td>Accident du travail</td>
+                        <td>Variable</td>
+                        <td>CPAM + complément employeur (selon CCN)</td>
+                    </tr>
+                    <tr>
+                        <td>Mariage (salarié)</td>
+                        <td>4 jours</td>
+                        <td>100% employeur</td>
+                    </tr>
+                    <tr>
+                        <td>Naissance/adoption</td>
+                        <td>3 jours</td>
+                        <td>100% employeur</td>
+                    </tr>
+                    <tr>
+                        <td>Décès (enfant, conjoint)</td>
+                        <td>5 à 8 jours</td>
+                        <td>100% employeur</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 15 : Enjeux économiques -->
+        <div class="slide">
+            <h2>IV. Enjeux économiques et sociaux</h2>
+            <h3>Les enjeux économiques</h3>
+            <ul>
+                <li><strong>Coût direct de la main-d'œuvre :</strong> Les heures supplémentaires majorées augmentent significativement la masse salariale</li>
+                <li><strong>Productivité :</strong> Optimiser le temps productif vs temps non productif impacte directement la rentabilité</li>
+                <li><strong>Coût de l'absentéisme :</strong> Désorganisation, heures supplémentaires pour compenser, baisse de production</li>
+                <li><strong>Coût du turnover :</strong> Un mauvais suivi du temps peut générer de l'insatisfaction et des départs</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>📊 Chiffre clé :</strong> Dans l'industrie, le coût de l'absentéisme peut représenter entre 3% et 7% de la masse salariale selon les secteurs.
+            </div>
+        </div>
+
+        <!-- Slide 16 : Enjeux sociaux -->
+        <div class="slide">
+            <h2>IV. Enjeux économiques et sociaux</h2>
+            <h3>Les enjeux sociaux</h3>
+            <ul>
+                <li><strong>Qualité de vie au travail (QVT) :</strong> Respect des temps de repos, équilibre vie pro/perso, prévention du burn-out</li>
+                <li><strong>Équité et justice :</strong> Transparence dans le décompte des heures, égalité de traitement</li>
+                <li><strong>Santé et sécurité :</strong> Surcharge de travail = risques d'accidents et troubles musculo-squelettiques (TMS)</li>
+                <li><strong>Climat social :</strong> Un mauvais suivi du temps génère tensions et conflits</li>
+                <li><strong>Conformité légale :</strong> Risques juridiques et pénalités en cas de non-respect du cadre légal</li>
+            </ul>
+            <div class="warning-box">
+                <strong>⚠️ Attention :</strong> L'inspection du travail peut contrôler le respect des durées maximales et sanctionner l'entreprise.
+            </div>
+        </div>
+
+        <!-- Slide 17 : Indicateurs intro -->
+        <div class="slide">
+            <h2>IV. Enjeux économiques et sociaux</h2>
+            <h3>Les principaux indicateurs (introduction)</h3>
+            <p style="font-size: 20px; margin-bottom: 30px;">Pour piloter efficacement la gestion du temps, les RH s'appuient sur des <strong>indicateurs clés</strong> :</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="definition-card">
+                    <h4>📉 Taux d'absentéisme</h4>
+                    <p>Mesure la proportion d'absences sur le temps théorique de travail</p>
+                </div>
+                <div class="definition-card">
+                    <h4>📈 Taux de présence</h4>
+                    <p>Complément du taux d'absentéisme</p>
+                </div>
+                <div class="definition-card">
+                    <h4>⏰ Taux d'heures supplémentaires</h4>
+                    <p>Rapport entre heures sup et heures normales</p>
+                </div>
+                <div class="definition-card">
+                    <h4>💶 Coût horaire</h4>
+                    <p>Coût moyen d'une heure de travail (salaire + charges)</p>
+                </div>
+            </div>
+            <div class="info-box" style="margin-top: 30px;">
+                <strong>➡️ Ces indicateurs seront détaillés et calculés dans le CM2 et les TD</strong>
+            </div>
+        </div>
+
+        <!-- Slide 18 : Transition exercice -->
+        <div class="slide">
+            <h2>🎓 Passons à la pratique !</h2>
+            <div class="exercise-box">
+                <h3>Mini-exercice : Analyse d'une semaine de production</h3>
+                <p style="font-size: 20px; margin-top: 20px;">Vous allez analyser le planning d'un atelier de production industrielle sur une semaine type et identifier :</p>
+                <ul style="margin-top: 20px; font-size: 19px;">
+                    <li>Les temps productifs</li>
+                    <li>Les temps non productifs</li>
+                    <li>Les heures supplémentaires éventuelles</li>
+                    <li>Les temps de pause et de repos</li>
+                </ul>
+            </div>
+            <div class="highlight-box">
+                <strong>🎯 Objectif :</strong> Appliquer les notions vues en cours et calculer des temps de base
+            </div>
+        </div>
+
+        <!-- Slide 19 : Exercice énoncé -->
+        <div class="slide">
+            <h2>📝 Mini-exercice : Énoncé</h2>
+            <div class="info-box">
+                <strong>Contexte :</strong> Atelier de fabrication de pièces métalliques chez IndusPro<br>
+                <strong>Équipe :</strong> Équipe du matin (5 opérateurs)<br>
+                <strong>Période :</strong> Semaine du 7 au 13 octobre 2025
+            </div>
+            
+            <h3 style="margin-top: 30px;">Planning hebdomadaire d'un opérateur (Paul)</h3>
+            <table style="font-size: 16px;">
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Arrivée</th>
+                        <th>Départ</th>
+                        <th>Pause déjeuner</th>
+                        <th>Activités</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td>8h00</td>
+                        <td>17h00</td>
+                        <td>12h-13h (1h)</td>
+                        <td>Production (6h) + Réunion équipe (1h) + Nettoyage poste (1h)</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td>8h00</td>
+                        <td>17h00</td>
+                        <td>12h-13h (1h)</td>
+                        <td>Production (7h) + Maintenance préventive (1h)</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td>8h00</td>
+                        <td>17h00</td>
+                        <td>12h-13h (1h)</td>
+                        <td>Production (7h) + Formation sécurité (1h)</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td>8h00</td>
+                        <td>18h00</td>
+                        <td>12h-13h (1h)</td>
+                        <td>Production (8h) + Préparation machines (1h)</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td>8h00</td>
+                        <td>17h00</td>
+                        <td>12h-13h (1h)</td>
+                        <td>Production (6h) + Contrôle qualité (1h) + Rangement (1h)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 20 : Exercice questions -->
+        <div class="slide">
+            <h2>📝 Mini-exercice : Questions</h2>
+            <div class="exercise-box">
+                <h3>À calculer (travail individuel ou binôme - 15 min) :</h3>
+                <ol style="list-style: decimal; padding-left: 40px; margin-top: 20px;">
+                    <li style="margin-bottom: 15px;"><strong>Calculez le temps de présence total</strong> de Paul sur la semaine (hors pauses déjeuner)</li>
+                    <li style="margin-bottom: 15px;"><strong>Calculez le temps de travail effectif</strong> hebdomadaire</li>
+                    <li style="margin-bottom: 15px;"><strong>Identifiez et totalisez</strong> :
+                        <ul style="font-size: 18px; margin-top: 10px;">
+                            <li>Les heures de production (temps productif)</li>
+                            <li>Les heures non productives mais nécessaires</li>
+                        </ul>
+                    </li>
+                    <li style="margin-bottom: 15px;"><strong>Y a-t-il des heures supplémentaires ?</strong> Si oui, combien et à quel taux de majoration ?</li>
+                    <li style="margin-bottom: 15px;"><strong>Le repos quotidien et hebdomadaire sont-ils respectés ?</strong></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Slide 21 : Correction partie 1 -->
+        <div class="slide">
+            <h2>✅ Correction - Partie 1</h2>
+            <h3>1. Temps de présence total</h3>
+            <div style="background: #f7fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <p><strong>Calcul :</strong></p>
+                <ul style="font-size: 18px;">
+                    <li>Lundi : 17h - 8h - 1h = 8h</li>
+                    <li>Mardi : 17h - 8h - 1h = 8h</li>
+                    <li>Mercredi : 17h - 8h - 1h = 8h</li>
+                    <li>Jeudi : 18h - 8h - 1h = 9h</li>
+                    <li>Vendredi : 17h - 8h - 1h = 8h</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 22px;"><strong>Total : 8 + 8 + 8 + 9 + 8 = 41 heures</strong></p>
+            </div>
+
+            <h3 style="margin-top: 30px;">2. Temps de travail effectif</h3>
+            <div class="highlight-box">
+                Le temps de présence = temps de travail effectif dans ce cas<br>
+                (toutes les activités sont à la disposition de l'employeur)<br>
+                <strong style="font-size: 24px;">→ 41 heures de travail effectif</strong>
+            </div>
+        </div>
+
+        <!-- Slide 22 : Correction partie 2 -->
+        <div class="slide">
+            <h2>✅ Correction - Partie 2</h2>
+            <h3>3. Répartition temps productif / non productif</h3>
+            <div class="two-columns">
+                <div style="background: #c6f6d5; padding: 20px; border-radius: 10px;">
+                    <strong style="color: #22543d; font-size: 20px;">⚙️ Temps productif</strong>
+                    <ul style="margin-top: 15px; font-size: 18px;">
+                        <li>Lundi : 6h</li>
+                        <li>Mardi : 7h</li>
+                        <li>Mercredi : 7h</li>
+                        <li>Jeudi : 8h</li>
+                        <li>Vendredi : 6h</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 22px;"><strong>Total : 34h de production</strong></p>
+                </div>
+                <div style="background: #feebc8; padding: 20px; border-radius: 10px;">
+                    <strong style="color: #7c2d12; font-size: 20px;">🔧 Temps non productif</strong>
+                    <ul style="margin-top: 15px; font-size: 18px;">
+                        <li>Réunion : 1h</li>
+                        <li>Nettoyage : 1h</li>
+                        <li>Maintenance : 1h</li>
+                        <li>Formation : 1h</li>
+                        <li>Préparation : 1h</li>
+                        <li>Contrôle qualité : 1h</li>
+                        <li>Rangement : 1h</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 22px;"><strong>Total : 7h (nécessaires)</strong></p>
+                </div>
+            </div>
+            <div class="info-box" style="margin-top: 20px;">
+                <strong>💡 Analyse :</strong> Le taux de temps productif est de 34h / 41h = <strong>82,9%</strong>, ce qui est correct pour l'industrie (entre 75% et 85% généralement).
+            </div>
+        </div>
+
+        <!-- Slide 23 : Correction partie 3 -->
+        <div class="slide">
+            <h2>✅ Correction - Partie 3</h2>
+            <h3>4. Heures supplémentaires</h3>
+            <div style="background: #f7fafc; padding: 25px; border-radius: 10px; margin: 20px 0;">
+                <p style="font-size: 20px;"><strong>Durée légale :</strong> 35 heures hebdomadaires</p>
+                <p style="font-size: 20px; margin-top: 15px;"><strong>Heures réalisées :</strong> 41 heures</p>
+                <p style="font-size: 24px; margin-top: 20px; color: #667eea;"><strong>Heures supplémentaires : 41 - 35 = 6 heures</strong></p>
+            </div>
+
+            <h3>Majoration applicable :</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tranche</th>
+                        <th>Heures</th>
+                        <th>Taux de majoration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>36e à 43e heure</td>
+                        <td>6 heures (de la 36e à la 41e)</td>
+                        <td><strong>+ 25%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <strong>Calcul simplifié :</strong><br>
+                Si le taux horaire de base est de 15€/h :<br>
+                • 35h normales = 35 × 15€ = 525€<br>
+                • 6h supplémentaires = 6 × 15€ × 1,25 = 112,50€<br>
+                <strong>→ Total brut : 637,50€</strong>
+            </div>
+        </div>
+
+        <!-- Slide 24 : Correction partie 4 -->
+        <div class="slide">
+            <h2>✅ Correction - Partie 4</h2>
+            <h3>5. Respect du repos quotidien et hebdomadaire</h3>
+            
+            <div class="definition-card">
+                <h4>🌙 Repos quotidien (11h minimum)</h4>
+                <p><strong>✅ OUI respecté</strong></p>
+                <ul style="margin-top: 10px; font-size: 18px;">
+                    <li>Lundi au mercredi : départ 17h → arrivée 8h = 15h de repos</li>
+                    <li>Jeudi : départ 18h → arrivée vendredi 8h = 14h de repos</li>
+                </ul>
+            </div>
+
+            <div class="definition-card">
+                <h4>📅 Repos hebdomadaire (24h + 11h = 35h minimum)</h4>
+                <p><strong>✅ OUI respecté</strong></p>
+                <p style="margin-top: 10px;">Vendredi 17h → lundi 8h = 63 heures de repos (week-end complet)</p>
+            </div>
+
+            <div class="definition-card">
+                <h4>⏰ Durée quotidienne maximale (10h)</h4>
+                <p><strong>✅ OUI respecté</strong></p>
+                <p style="margin-top: 10px;">La journée la plus longue (jeudi) = 9h de travail effectif</p>
+            </div>
+        </div>
+
+        <!-- Slide 25 : Synthèse exercice -->
+        <div class="slide">
+            <h2>📊 Synthèse de l'exercice</h2>
+            <div class="highlight-box">
+                <h3 style="color: white;">Bilan de la semaine de Paul</h3>
+                <table style="width: 100%; margin-top: 20px; background: white; border-radius: 10px;">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 15px;"><strong>Temps de présence total</strong></td>
+                            <td style="padding: 15px; text-align: right;"><strong>41 heures</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;"><strong>Temps productif</strong></td>
+                            <td style="padding: 15px; text-align: right;"><strong>34 heures (82,9%)</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;"><strong>Temps non productif</strong></td>
+                            <td style="padding: 15px; text-align: right;"><strong>7 heures (17,1%)</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;"><strong>Heures supplémentaires</strong></td>
+                            <td style="padding: 15px; text-align: right;"><strong>6 heures (+25%)</strong></td>
+                        </tr>
+                        <tr style="background: #c6f6d5;">
+                            <td style="padding: 15px;"><strong>Conformité légale</strong></td>
+                            <td style="padding: 15px; text-align: right;"><strong>✅ Respectée</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="info-box" style="margin-top: 30px;">
+                <strong>💡 Points clés à retenir :</strong><br>
+                • Toutes les activités à la disposition de l'employeur = temps effectif<br>
+                • Le temps non productif reste du temps de travail effectif<br>
+                • Les heures sup se calculent au-delà de 35h hebdomadaires<br>
+                • Le respect des temps de repos est obligatoire
+            </div>
+        </div>
+
+        <!-- Slide 26 : Récapitulatif du cours -->
+        <div class="slide">
+            <h2>📚 Récapitulatif du CM1</h2>
+            <h3 style="margin-bottom: 30px;">Ce que vous devez retenir</h3>
+            
+            <div class="definition-card">
+                <h4>1️⃣ Définitions clés</h4>
+                <p>Temps de travail effectif, pauses, congés, RTT, heures supplémentaires</p>
+            </div>
+
+            <div class="definition-card">
+                <h4>2️⃣ Cadre légal</h4>
+                <p>35h/semaine, 1607h/an, durées maximales, temps de repos obligatoires</p>
+            </div>
+
+            <div class="definition-card">
+                <h4>3️⃣ Typologie</h4>
+                <p>Distinction temps productif/non productif, absences rémunérées/indemnisées/non rémunérées</p>
+            </div>
+
+            <div class="definition-card">
+                <h4>4️⃣ Enjeux</h4>
+                <p>Impact économique (coûts, productivité) et social (QVT, santé, climat)</p>
+            </div>
+
+            <div class="definition-card">
+                <h4>5️⃣ Pratique</h4>
+                <p>Savoir analyser un planning et calculer les temps de base</p>
+            </div>
+        </div>
+
+        <!-- Slide 27 : Prochaine étape -->
+        <div class="slide">
+            <h2>🔜 Prochaine étape : CM2</h2>
+            <div class="info-box">
+                <h3 style="color: #667eea;">Les indicateurs de gestion du temps et du tableau de bord social</h3>
+                <p style="margin-top: 15px; font-size: 20px;">Au programme :</p>
+                <ul style="margin-top: 15px; font-size: 19px;">
+                    <li>Calcul du taux d'absentéisme</li>
+                    <li>Calcul du taux de présence</li>
+                    <li>Calcul du taux d'heures supplémentaires</li>
+                    <li>Calcul du coût horaire</li>
+                    <li>Construction d'un tableau de bord social</li>
+                    <li>Interprétation et pilotage RH</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>📝 Avant le CM2 :</strong> Révisez les formules de pourcentage et les calculs de moyennes !
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-size: 22px; color: #667eea; font-weight: 600;">🎯 Rendez-vous pour le premier TD !</p>
+            </div>
+        </div>
+
+        <!-- Slide 28 : Fin -->
+        <div class="slide">
+            <div style="text-align: center; padding-top: 100px;">
+                <h1 style="font-size: 56px; color: #667eea;">Merci de votre attention ! 👏</h1>
+                <p style="font-size: 28px; color: #4a5568; margin-top: 40px;">Des questions ?</p>
+                <div style="margin-top: 80px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white;">
+                    <p style="font-size: 22px; margin-bottom: 15px;">📧 Contact</p>
+                    <p style="font-size: 18px;">Module : Calcul de gestion du temps et tableau de bord social</p>
+                    <p style="font-size: 18px;">BUT GEA 2e année - GPRH</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+            <span class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">28</span>
+            </span>
+            <button id="nextBtn" onclick="changeSlide(1)">Suivant ▶</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
